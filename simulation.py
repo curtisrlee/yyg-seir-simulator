@@ -56,6 +56,7 @@ def run(region_model):
     deaths = np.array([0.] * region_model.N)
     reported_deaths = np.array([0.] * region_model.N)
     mortaility_rates = np.array([region_model.MORTALITY_RATE] * region_model.N)
+    vaccinations = np.array([0.] * region_model.N)
 
     assert infections.dtype == hospitalizations.dtype == \
         deaths.dtype == reported_deaths.dtype == mortaility_rates.dtype == np.float64
@@ -80,6 +81,12 @@ def run(region_model):
     assert 0 <= region_model.immunity_mult <= 2, region_model.immunity_mult
 
     ########################################
+    # Compute vaccinations
+    ########################################
+    for i in range(region_model.N):
+        vaccinations[i] = 200000
+
+    ########################################
     # Compute infections
     ########################################
     effective_r_arr = []
@@ -91,7 +98,10 @@ def run(region_model):
             continue
 
         # assume 50% of population lose immunity after 6 months
-        infected_thus_far = infections[:max(0, i-180)].sum() * 0.5 + infections[max(0, i-180):i-1].sum()
+        infected_thus_far = infections[:max(0, i-180)].sum() * 0.5 + \
+            infections[max(0, i-180):i-1].sum() + \
+            vaccinations[max(0, i-180):i-1].sum()
+
         perc_population_infected_thus_far = \
             min(1., infected_thus_far / region_model.population)
         assert 0 <= perc_population_infected_thus_far <= 1, perc_population_infected_thus_far
