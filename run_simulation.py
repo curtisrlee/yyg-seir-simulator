@@ -13,6 +13,8 @@ import json
 import os
 
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 from region_model import RegionModel
 from simulation import run
@@ -113,6 +115,7 @@ def main(args):
     quarantine_perc = args.quarantine_perc
     quarantine_effectiveness = args.quarantine_effectiveness
     verbose = args.verbose
+    graph = args.graph
 
     if country != 'US' and not region:
         region = 'ALL'
@@ -169,7 +172,7 @@ def main(args):
 
     # from data https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html
     params_dict["VAX_PEAK_RATIO_PER_DAY"] = 3500000 / 328200000 
-    params_dict["VAX_SIGMA"] = 0.11
+    params_dict["VAX_SIGMA"] = 0.12
 
     if args.simulation_start_date:
         simulation_start_date = str_to_date(args.simulation_start_date)
@@ -275,6 +278,22 @@ def main(args):
         np.savetxt(args.save_csv_fname, combined_arr, '%s', delimiter=',', header=headers)
         print('----------\nSaved file to:', args.save_csv_fname)
 
+    if args.graph:
+        plt.figure(figsize=(12,6))
+        plt.title('results')
+        
+        plt.plot(dates, deaths)
+        plt.plot(dates, vaccinations / 1000)
+        plt.legend(['death', '5g shots (1000s)'])
+
+        ax = plt.gca()
+        for label in ax.get_xticklabels():
+            label.set_rotation(30)
+            label.set_horizontalalignment('right')
+        
+
+        plt.show()
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -317,6 +336,7 @@ if __name__ == '__main__':
         help='only necessary if loading params from --best_params_dir')
 
     parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('-g', '--graph', action='store_true')
 
     args = parser.parse_args()
 

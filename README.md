@@ -1,4 +1,4 @@
-# ECE227 Project Improvements
+## ECE227 Project Improvements
 ```
 params_dict["VAX"] = 0.0 # does nothing
 params_dict["VAX_START_DATE"] = datetime.date(2020,12,1)
@@ -7,6 +7,18 @@ params_dict["VAX_PEAK_DATE"] = datetime.date(2021,4,1)
 # from data https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html
 params_dict["VAX_PEAK_RATIO_PER_DAY"] = 3500000 / 328200000 
 params_dict["VAX_SIGMA"] = 0.11
+```
+
+Good Parameters (realistic)
+```
+python run_simulation.py -v --best_params_dir best_params/latest --country US --simulation_end_date 2021-06-30 -g \
+--set_param REOPEN_R 1.35 \
+--set_param POST_REOPEN_EQUILIBRIUM_R 0.97
+```
+
+No Vaxx
+```
+--set_param VAX_PEAK_RATIO_PER_DAY 0
 ```
 
 # YYG / covid19-projections.com SEIR Simulator
