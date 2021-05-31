@@ -1,3 +1,14 @@
+# ECE227 Project Improvements
+```
+params_dict["VAX"] = 0.0 # does nothing
+params_dict["VAX_START_DATE"] = datetime.date(2020,12,1)
+params_dict["VAX_PEAK_DATE"] = datetime.date(2021,4,1)
+
+# from data https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html
+params_dict["VAX_PEAK_RATIO_PER_DAY"] = 3500000 / 328200000 
+params_dict["VAX_SIGMA"] = 0.11
+```
+
 # YYG / covid19-projections.com SEIR Simulator
 
 We present the underlying SEIR model simulator behind the YYG / [covid19-projections.com](https://covid19-projections.com) model, as well a summarized set of parameters that helped generate the projections.
