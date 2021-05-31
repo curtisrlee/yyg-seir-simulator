@@ -107,8 +107,11 @@ def run(region_model):
 
         # assume 50% of population lose immunity after 6 months
         infected_thus_far = infections[:max(0, i-180)].sum() * 0.5 + \
-            infections[max(0, i-180):i-1].sum() + \
-            vaccinations[max(0, i-180):i-1].sum()
+            infections[max(0, i-180):i-1].sum()
+            
+        vaccinated_thus_far = (1 - infected_thus_far/region_model.population) * vaccinations[max(0, i-180):i-1].sum()
+
+        infected_thus_far += vaccinated_thus_far
 
         perc_population_infected_thus_far = \
             min(1., infected_thus_far / region_model.population)

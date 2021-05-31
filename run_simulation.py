@@ -264,6 +264,7 @@ def main(args):
                 f'Vax: {vaccinations[i]:,.0f}')
             print(daily_str) # comment out to spare console buffer
     print('-------------------------------------')
+    print(f'Vaccine drop date       : {region_model.VAX_START_DATE}')
     print(f'End of simulation       : {region_model.projection_end_date}')
     print(f'Total infections        : {infections.sum():,.0f}')
     if not skip_hospitalizations:
@@ -280,11 +281,11 @@ def main(args):
 
     if args.graph:
         plt.figure(figsize=(12,6))
-        plt.title('results')
+        plt.title(f'{country} Results')
         
         plt.plot(dates, deaths)
         plt.plot(dates, vaccinations / 1000)
-        plt.legend(['death', '5g shots (1000s)'])
+        plt.legend(['Deaths (x 1)', 'Vaccinations (x 1000)'])
 
         ax = plt.gca()
         for label in ax.get_xticklabels():
