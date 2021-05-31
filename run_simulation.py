@@ -163,6 +163,14 @@ def main(args):
             'FALL_R_MULTIPLIER' : 1.001,
         }
 
+    params_dict["VAX"] = 0.0
+    params_dict["VAX_START_DATE"] = datetime.date(2020,12,1)
+    params_dict["VAX_PEAK_DATE"] = datetime.date(2021,4,1)
+
+    # from data https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html
+    params_dict["VAX_PEAK_RATIO_PER_DAY"] = 3500000 / 328200000 
+    params_dict["VAX_SIGMA"] = 0.11
+
     if args.simulation_start_date:
         simulation_start_date = str_to_date(args.simulation_start_date)
     if args.simulation_end_date:
@@ -222,7 +230,7 @@ def main(args):
         print('--------------------------')
 
     # Run simulation
-    dates, infections, hospitalizations, deaths = run(region_model)
+    dates, infections, hospitalizations, deaths, vaccinations = run(region_model)
 
     """
     The following are lists with length N, where N is the number of days from
@@ -249,7 +257,8 @@ def main(args):
                 f'{hospitalization_str}'
                 f'New / total deaths: {deaths[i]:,.2f} / {deaths_total[i]:,.1f} - '
                 f'Mean R: {region_model.effective_r_arr[i]:.3f} - '
-                f'IFR: {region_model.ifr_arr[i]:.2%}')
+                f'IFR: {region_model.ifr_arr[i]:.2%} - '
+                f'Vax: {vaccinations[i]:,.0f}')
             print(daily_str) # comment out to spare console buffer
     print('-------------------------------------')
     print(f'End of simulation       : {region_model.projection_end_date}')

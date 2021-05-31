@@ -4,6 +4,8 @@ import numpy as np
 
 from fixed_params import DATE_STR_FMT, DASH_REGIONS
 
+def gaussian(x, mu, sig):
+    return np.exp(-np.power(x - mu, 2.) / (2 * np.power(sig, 2.)))
 
 def inv_sigmoid(shift=0, a=1, b=1, c=0):
     """Returns a inverse sigmoid function based on the parameters."""

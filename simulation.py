@@ -8,6 +8,7 @@ import datetime
 import numpy as np
 
 from fixed_params import *
+from utils import gaussian
 
 
 def get_daily_imports(region_model, i):
@@ -83,8 +84,15 @@ def run(region_model):
     ########################################
     # Compute vaccinations
     ########################################
-    for i in range(region_model.N):
-        vaccinations[i] = 200000
+
+    vax_days_delta = region_model.VAX_START_DATE - region_model.first_date
+
+    for i in range(vax_days_delta.days, region_model.N):
+        mu = (region_model.VAX_PEAK_DATE - region_model.first_date).days
+        sigma = mu * region_model.VAX_SIGMA
+
+        vaccinations_per_day = region_model.population * region_model.VAX_PEAK_RATIO_PER_DAY * gaussian(i, mu, sigma)
+        vaccinations[i] = vaccinations_per_day
 
     ########################################
     # Compute infections
@@ -163,5 +171,5 @@ def run(region_model):
         reported_deaths[i:i+max_idx] += \
             (death_reporting_lag_arr_norm * detected_deaths)[:max_idx]
 
-    return dates, infections, hospitalizations, reported_deaths
+    return dates, infections, hospitalizations, reported_deaths, vaccinations
 
