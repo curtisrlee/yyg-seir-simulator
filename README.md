@@ -8,6 +8,9 @@ params_dict["VAX_PEAK_DATE"] = datetime.date(2021,4,1)
 # from data https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html
 params_dict["VAX_PEAK_RATIO_PER_DAY"] = 3500000 / 328200000 
 params_dict["VAX_SIGMA"] = 0.11
+
+params_dict["VAX_DROPOFF_DAYS"] = 0.0
+params_dict["VAX_DROPOFF_INFLECTION"] = 0.0
 ```
 ```
 -g --graph draws a graph
@@ -18,9 +21,9 @@ Good Parameters (realistic)
 python run_simulation.py -v --best_params_dir best_params/latest --country US -g \
 --simulation_end_date 2021-05-30 \
 --set_param REOPEN_R 1.22 \
---set_param REOPEN_INFLECTION 0.205 \
---set_param POST_REOPEN_EQUILIBRIUM_R .8802 \
---set_param FALL_R_MULTIPLIER 1.01
+--set_param REOPEN_INFLECTION 0.22 \
+--set_param POST_REOPEN_EQUILIBRIUM_R .87 \
+--set_param FALL_R_MULTIPLIER 1.025
 ```
 
 No Vaxx
@@ -28,9 +31,9 @@ No Vaxx
 python run_simulation.py -v --best_params_dir best_params/latest --country US -g \
 --simulation_end_date 2021-05-30 \
 --set_param REOPEN_R 1.22 \
---set_param REOPEN_INFLECTION 0.205 \
---set_param POST_REOPEN_EQUILIBRIUM_R .8802 \
---set_param FALL_R_MULTIPLIER 1.01 \
+--set_param REOPEN_INFLECTION 0.22 \
+--set_param POST_REOPEN_EQUILIBRIUM_R .87 \
+--set_param FALL_R_MULTIPLIER 1.025 \
 --set_param VAX_PEAK_RATIO_PER_DAY 0
 ```
 

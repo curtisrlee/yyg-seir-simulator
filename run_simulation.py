@@ -167,12 +167,16 @@ def main(args):
         }
 
     params_dict["VAX"] = 0.0
-    params_dict["VAX_START_DATE"] = datetime.date(2020,12,1)
-    params_dict["VAX_PEAK_DATE"] = datetime.date(2021,4,1)
+    params_dict["VAX_START_DATE"] = datetime.date(2020,12,11)
+    params_dict["VAX_PEAK_DATE"] = datetime.date(2021,4,15)
 
     # from data https://www.nytimes.com/interactive/2020/us/covid-19-vaccine-doses.html
     params_dict["VAX_PEAK_RATIO_PER_DAY"] = 3500000 / 328200000 
     params_dict["VAX_SIGMA"] = 0.12
+    params_dict["VAX_ACCESS"] = 1.0
+
+    params_dict["VAX_DROPOFF_DAYS"] = 0.0
+    params_dict["VAX_DROPOFF_INFLECTION"] = 0.0
 
     if args.simulation_start_date:
         simulation_start_date = str_to_date(args.simulation_start_date)
@@ -280,7 +284,7 @@ def main(args):
         print('----------\nSaved file to:', args.save_csv_fname)
 
     if args.graph:
-        plt.figure(figsize=(12,6))
+        plt.figure(figsize=(16,6))
         plt.title(f'{country} Results')
         
         plt.plot(dates, deaths)
