@@ -285,6 +285,8 @@ def main(args):
         print('----------\nSaved file to:', args.save_csv_fname)
 
     if args.graph:
+        plotdir = os.path.join(os.getcwd(), 'plot')
+        os.makedirs(plotdir, exist_ok=True) 
 
         plt.figure(figsize=(16,6))
         plt.title(f'{country} Results')
@@ -298,7 +300,8 @@ def main(args):
             label.set_rotation(30)
             label.set_horizontalalignment('right')
 
-        plt.show()
+        # plt.show()
+        plt.savefig(os.path.join(plotdir, datetime.datetime.now().strftime('%m-%d-%Y-H-%M-%S.jpg')))
 
 
 if __name__ == '__main__':
