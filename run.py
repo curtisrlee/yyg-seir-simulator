@@ -60,37 +60,6 @@ for simulation in simulations:
     result[key] = value
   
   results.append(result)
-  
-  # days = []
-  # for line in output_lines:
-  #   search = '^(\d.*)\s-.*$'
-  #   result = re.findall(search, line.decode().strip())
-  #   days.append(result)
-  
-  # N = len(days)
-  # dates = []]
-  # deaths = np.zeros(N)
-  # vaccinations = np.zeros(N)
-  # for day in days:
-  #   data = day.split('-')
-  #   date = data[1].strip()
-  #   death = data[4].split().strip()
-  #   vax = data[5].strip()
-
-  # plt.figure(figsize=(16,6))
-  # plt.title(f'{country} Results')
-  
-  # plt.plot(dates, deaths)
-  # plt.plot(dates, vaccinations / 1000)
-  # plt.legend(['Deaths (x 1)', 'Vaccinations (x 1000)'])
-
-  # ax = plt.gca()
-  # for label in ax.get_xticklabels():
-  #     label.set_rotation(30)
-  #     label.set_horizontalalignment('right')
-
-  # plt.show()
-  
 
 df = pd.DataFrame(results)
 # df = df.astype({'VAX_PEAK_RATIO_PER_DAY': bool})
