@@ -92,6 +92,7 @@ def run(region_model):
         sigma = mu * region_model.VAX_SIGMA
 
         vaccinations_per_day = region_model.population * region_model.VAX_PEAK_RATIO_PER_DAY * gaussian(i, mu, sigma)
+        vaccinations_per_day *= region_model.VAX_ACCESS
         vaccinations[i] = vaccinations_per_day
 
     ########################################

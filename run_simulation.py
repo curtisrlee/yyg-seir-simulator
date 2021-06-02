@@ -15,6 +15,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import pandas as pd
 
 from region_model import RegionModel
 from simulation import run
@@ -284,6 +285,7 @@ def main(args):
         print('----------\nSaved file to:', args.save_csv_fname)
 
     if args.graph:
+
         plt.figure(figsize=(16,6))
         plt.title(f'{country} Results')
         
@@ -295,7 +297,6 @@ def main(args):
         for label in ax.get_xticklabels():
             label.set_rotation(30)
             label.set_horizontalalignment('right')
-        
 
         plt.show()
 
