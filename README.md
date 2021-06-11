@@ -1,5 +1,6 @@
 ## ECE227 Project Improvements
 New additions:
+Edited files to incorporate our Vaccination component. Primarilly in the simulation.py file, but also in other sections to add our new parameters.
 ```
 params_dict["VAX"] = 0.0 # does nothing
 params_dict["VAX_START_DATE"] = datetime.date(2020,12,1)
