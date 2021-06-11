@@ -290,10 +290,11 @@ def main(args):
 
         plt.figure(figsize=(16,6))
         plt.title(f'{country} Results')
-        
+
         plt.plot(dates, deaths)
         plt.plot(dates, vaccinations / 1000)
         plt.legend(['Deaths (x 1)', 'Vaccinations (x 1000)'])
+        plt.grid()
 
         ax = plt.gca()
         for label in ax.get_xticklabels():
@@ -301,7 +302,7 @@ def main(args):
             label.set_horizontalalignment('right')
 
         # plt.show()
-        plt.savefig(os.path.join(plotdir, datetime.datetime.now().strftime('%m-%d-%Y-H-%M-%S.jpg')))
+        plt.savefig(os.path.join(plotdir, datetime.datetime.now().strftime('%m-%d-%Y-%H-%M-%S.jpg')), bbox_inches='tight')
 
 
 if __name__ == '__main__':
